@@ -1,12 +1,14 @@
+import "./App.css";
 import TodoList from "./components/TodoList";
+import { Typography } from "@mui/material";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <header>
-        <h1>Todo List</h1>
+        <Typography variant="h1">Todo List</Typography>
         <hr />
-        <TodoList/>
+        <TodoList />
       </header>
     </div>
   );
