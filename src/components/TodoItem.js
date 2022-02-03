@@ -13,7 +13,8 @@ const useStyles = makeStyles({
 const TodoItem = (props) => {
   const classes = useStyles();
   const handleDelete = () => {
-    console.log("Clicked");
+    props.deleteItem(props.item);
+    console.log("deleted item id_" + props.item.id);
   };
   return (
     <Grid container spacing={0}>

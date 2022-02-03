@@ -12,6 +12,7 @@ class TodoList extends Component {
       items: [],
     };
     this.updateTodoList = this.updateTodoList.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,22 @@ class TodoList extends Component {
     });
   }
 
+  deleteItem(item) {
+    // delete the item remotely
+    var deleteUrl = api_url + `/${item.id}`;
+    fetch(deleteUrl, {
+      method: "DELETE",
+    }).then(() => {
+      // client side delete
+      var _items = this.state.items;
+      var index = _items.indexOf(item);
+      _items.splice(index, 1);
+      this.setState({
+        items: _items,
+      });
+    });
+  }
+
   render() {
     console.log(this.state.items);
     return (
@@ -45,7 +62,7 @@ class TodoList extends Component {
         </Grid>
         <Grid item xs={12} id="todo_list">
           {this.state.items.map((item) => (
-            <TodoItem key={item.id} item={item} />
+            <TodoItem key={item.id} item={item} deleteItem={this.deleteItem} />
           ))}
         </Grid>
       </Grid>
